@@ -1,0 +1,31 @@
+<% @day.shifts.each_with_index do |shift,shift_index| %>
+  <div class="card d-flex mb-3">
+    <div class="card-body">
+      <div class="d-flex justify-content-between">
+        <div class="mb-0 mb-0 pt-5 px-5 mx-3">
+          <h5><i class="fa-solid fa-business-time"></i> From: <%= shift.start_time.strftime("%H:%M") %> - To: <%= shift.end_time.strftime("%H:%M") %></h5>
+          <hr>
+          <div id="shift-status-<%= shift.id %>">
+            <%= render "shifts/status", shift: shift %>
+          </div>
+        </div>
+        <div class="m-2">
+          <p>Employee Assigned</p>
+        </>
+        <div data-controller="sortable" data-method="destroy" data-shift-id="<%= shift.id %>">
+          <% shift.assignments.each do |assignment| %>
+            <div class="notification draggable-item" data-id="<%= assignment.id %>">
+              <% if assignment.user.photo.key %>
+                <%= cl_image_tag assignment.user.photo.key, class: "avatar-large" %>
+              <% end %>
+              <div class="notification-content text-center">
+                <%= assignment.user.name %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

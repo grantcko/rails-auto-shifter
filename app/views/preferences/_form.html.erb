@@ -1,0 +1,26 @@
+<div class="container mt-5">
+  <h4>Make a Request on <%= @day.date.strftime("%A, %-d %B %Y") %>
+  </h4>
+  <%= simple_form_for [@day, @preference] do |f| %>
+    <%#= f.input :category, as: :radio_buttons, collection: @types %>
+    <%= f.input :category,
+            as: :radio_buttons,
+            collection_wrapper_tag: 'div',
+            collection_wrapper_class: 'category-wrapper',
+            item_wrapper_class: 'category-item',
+            input_html: {class: 'category-selector'},
+            collection: Preference::CATEGORY %>
+    <p>Please Select Unavailable Shift (Time off)</p>
+    <fieldset class="form-group check_boxes optional snippet_tags d-flex justify-content-around">
+      <% @day.shifts.each do |shift| %>
+        <div class="tag-item">
+          <%= check_box_tag "preference[unavailable_shift_ids][]", shift.id, nil, id: "preference-shift-#{shift.id}", class: "form-check-input tag-selector" %>
+          <label for="preference-shift-<%= shift.id %>" class="form-check-label"><%= shift.start_time.strftime("%I:%M %p") %> - <%= shift.end_time.strftime("%I:%M %p") %></label><br>
+        </div>
+      <% end %>
+    </fieldset>
+    <%= f.input :note %>
+    <%= link_to 'Back', days_path, class:'btn btn-light' %>
+    <%= f.submit 'Confirm', class:'btn btn-warning text-light'  %>
+  <% end %>
+</div>

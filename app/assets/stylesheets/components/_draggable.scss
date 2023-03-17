@@ -1,0 +1,7 @@
+.draggable-item {
+  cursor: grab; /* W3C standards syntax, all modern browser */
+}
+
+.draggable-item:active {
+  cursor: grabbing;
+}

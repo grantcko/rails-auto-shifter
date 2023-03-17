@@ -1,0 +1,39 @@
+<div class="banner" style="background-image: url(<%=image_path "background.png" %>);">
+  <div class="container banner-image d-flex flex-column">
+    <%= image_tag "logo1.png", size: "470x200"%>
+    <% if user_signed_in? %>
+      <%= link_to 'Dashboard', days_path, class: 'mt-4 mx-4 flex-grow-0 text-decoration-none sign btn btn-dark' %>
+    <% else %>
+      <%= link_to 'Sign In', new_user_session_path, class: 'mt-4 mx-4 flex-grow-0 text-decoration-none sign btn btn-dark' %>
+    <% end %>
+  </div>
+  <div class="supporting">
+    <div class="container d-flex justify-content-between ">
+      <div class="card-sup  border border-secondary text-center">
+        <div class="sup"><%= image_tag "sup2.png"%></div>
+        <h2>Say Goodbye to Scheduling Headaches</h2>
+        <p></p>
+      </div>
+      <div class="card-sup border border-secondary text-center">
+        <div class="sup"><%= image_tag "sup1.png"%></div>
+        <h2>Shift<br>
+          Management<br>
+           Made Easy</h2>
+        <p></p>
+      </div>
+      <div class="card-sup border border-secondary text-center">
+        <div class="sup"><%= image_tag "sup3.png"%></div>
+        <h2>Revolutionize <br>
+          Your Shift Scheduling</h2>
+        <p></p>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div style="margin-top: 500px; background: transparent"></div>
+  <div class="footer">
+    <div class="container">
+      <p>&copy; Shift Better 2023</p>
+    </div>
+  </div>
+</div>

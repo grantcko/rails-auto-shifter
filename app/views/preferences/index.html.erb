@@ -1,0 +1,19 @@
+<% @preferences.each do |preference| %>
+  <% category = preference.category %>
+  <% if category == "shift" %>
+    <% preference.unavailable_shift_ids.each do |id| %>
+      <% start_time = Shift.find_by(id:).start_time.hour %>
+      <% end_time = Shift.find_by(id:).end_time.hour %>
+      <p>You have requested the shift from <%= start_time %>:00 to <%= end_time %>:00 off</p>
+    <% end %>
+  <% elsif category == "dayoff" %>
+    <p>You have requested this day off</p>
+  <% end %>
+  <%# DELETE BUTTON %>
+  <%= link_to preference_path(preference), data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this #{preference.category}?" }, class: 'text-primary text-decoration-none' do %>
+    <i class="fa-solid fa-trash-can"></i> Delete Request
+  <% end %>
+  <%# DELETE BUTTON %>
+<% end %>
+<h2>Make a Request on this day</h2>
+<%= link_to 'Create',new_day_preference_path(@day), class: 'btn btn-success text-decoration-none text-light' %>

@@ -1,0 +1,19 @@
+<div data-controller="sortable" data-method="create">
+  <% @sorted_users.each do |user| %>
+    <ul class="notification draggable-item" data-id="<%= user.id %>">
+      <% if user.photo.key %>
+        <%= cl_image_tag user.photo.key, class: "avatar-large" %>
+      <% end %>
+      <div class="notification-content text-center">
+        <p><%= user.name %></p>
+        <% if user.shift_errors[1] == "available" %>
+          <p class="text-success"><em><%= user.shift_errors[1] %></em></p>
+        <% elsif user.shift_errors[1] == "scheduled today" %>
+          <p class="text-gray"><em><%= user.shift_errors[1] %></em></p>
+        <% else %>
+          <p class="text-primary"><em><%= user.shift_errors[1] %></em></p>
+        <% end %>
+      </div>
+    </ul>
+  <% end %>
+</div>

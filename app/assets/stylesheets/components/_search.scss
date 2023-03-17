@@ -1,0 +1,39 @@
+.search{
+  float: right;
+}
+.list{
+
+  margin-left: 16px;
+  margin-top: 33px;
+
+}
+.notificationsearch{
+  align-items: center;
+  margin-bottom: 8px;
+  background: white;
+  border: 1px solid rgb(235,235,235);
+  border-color: lightgray;
+  border-radius: 5px;
+}
+#name-search{
+  font-size: 14px;
+  margin: 0 4px;
+}
+.searchbutton{
+  height: 40px;
+}
+
+.green {
+  color: rgb(15, 198, 15);
+}
+
+.orange {
+  color: rgb(227, 111, 21);
+}
+.parent {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  }

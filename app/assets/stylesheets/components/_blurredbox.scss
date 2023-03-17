@@ -1,0 +1,26 @@
+.blurred-box{
+  position: absolute;
+  width: 1000px;
+  height: 400px;
+  z-index: 1;
+  left: 200px;
+  top: 200px;
+  backdrop-filter: blur(10px);
+  border: 2px;
+  border-color: black;
+}
+
+.carousel-inner{
+  position:relative;
+
+}
+
+#sb{
+  font-weight: bold;
+  color: antiquewhite;
+}
+
+#sb2{
+  font-weight: bold;
+  color: antiquewhite;
+}

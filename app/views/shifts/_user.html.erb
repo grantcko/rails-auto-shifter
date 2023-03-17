@@ -1,0 +1,10 @@
+<div data-controller="sortable" data-method="create">
+  <% User.all.each do |user| %>
+    <ul class="notification draggable-item" data-id="<%= user.id %>">
+      <%= cl_image_tag user.photo.key, class: "avatar-large" %>
+      <div class="notification-content text-center">
+        <p><%= user.name %></p>
+      </div>
+    </ul>
+  <% end %>
+</div>

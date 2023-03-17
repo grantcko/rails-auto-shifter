@@ -1,0 +1,28 @@
+<div class="d-flex" style="margin-left:4.5rem;">
+  <div class="container text-center">
+    <%# <div class="card-sticky"> %>
+    <div class="bg-heading text-white my-3 px-5">
+      <h4><i class="fa-solid fa-calendar-days pt-3 pb-3"></i> Currently Viewing:
+        <%= @day.date.strftime("%e %B %Y") %></h4>
+    </div>
+    <div style="display: flex; justify-content: center;">
+      <div>
+        <%= render 'days/shift' %>
+      </div>
+    </div>
+    <%# </div> %>
+  </div>
+  <div class= 'container m-5 text-center'>
+    <div class="d-flex justify-content-evenly">
+      <div>
+        <p class="bg-heading">Choose Employee to Replace</p>
+        <div>
+          <%= render 'days/user' %>
+        </div>
+      </div>
+    </div>
+    <div class="mt-3">
+      <%= link_to 'Back to Month View', days_path, class: 'text-primary text-decoration-none'  %>
+    </div>
+  </div>
+</div>

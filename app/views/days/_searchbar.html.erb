@@ -1,0 +1,57 @@
+<div class="list">
+  <p><%= form_with url: days_path, method: :get, class: "d-flex my-3 searchbutton" do %>
+      <%= text_field_tag :query,
+    params[:query],
+    class: "form-control",
+    placeholder: "Find a Team Member" %>
+      <%= submit_tag "Search", class: "btn btn-primary" %>
+    <% end %> </p>
+  <div class="parent">
+    <% users_without_day_off = users.select { |user| user.preferences.where(category: "day_off").count < 3 } %>
+    <% users_with_day_off = users.select { |user| user.preferences.where(category: "day_off").count >= 3 } %>
+    <% users_without_day_off.each do |user| %>
+      <%= form_with url: days_path, method: :get do %>
+        <%= hidden_field_tag :user_id, user.id, class: "form-control" %>
+        <%= button_tag(type: "submit", class: "w-100") do %>
+          <div class="notification-list justify-content-between text-nowrap w-100">
+            <% if user.photo.key %>
+              <%= cl_image_tag user.photo.key, class: "rounded-circle", width: 36, height: 36 %>
+            <% end %>
+            <div id="name-search">
+              <%= user.name %>
+            </div>
+            <div>
+              <% if user.preferences.where(category: "day_off").count >= 3 %>
+                <i class="fa-sharp fa-solid fa-circle-check text-warning"></i>
+              <% else %>
+                <i class="fa-sharp fa-solid fa-hourglass-start text-gray"></i>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+    <% users_with_day_off.each do |user| %>
+      <%= form_with url: days_path, method: :get do %>
+        <%= hidden_field_tag :user_id, user.id, class: "form-control" %>
+        <%= button_tag(type: "submit", class: "w-100") do %>
+          <div class="notification-list justify-content-between text-nowrap w-100">
+            <% if user.photo.key %>
+              <%= cl_image_tag user.photo.key, class: "rounded-circle", width: 36, height: 36 %>
+            <% end %>
+            <div id="name-search">
+              <%= user.name %>
+            </div>
+            <div>
+              <% if user.preferences.where(category: "day_off").count >= 3 %>
+                <i class="fa-sharp fa-solid fa-circle-check text-warning"></i>
+              <% else %>
+                <i class="fa-sharp fa-solid fa-hourglass-start text-gray"></i>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

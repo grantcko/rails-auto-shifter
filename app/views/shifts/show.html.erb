@@ -1,0 +1,15 @@
+<div class= 'container m-5 text-center'>
+  <h3 class="text-bold mb-2"><%= @shift.start_time.strftime("%A, %-d %B %Y") %></h3>
+  <div class="d-flex justify-content-evenly">
+    <div>
+      <%= render 'shifts/conflict' %>
+    </div>
+    <div>
+      <p class="card-shift">Choose Employee to Replace</p>
+      <%= render 'shifts/user' %>
+    </div>
+  </div>
+</div>
+</div>
+<%# <p> View the details of shift, so that I can see conflicts/problems</p> %>
+<%# <p> Manager click on specific day 'day_id', and click on specific shift 'shift_id' to land on this page </p> %>

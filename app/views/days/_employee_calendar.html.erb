@@ -1,0 +1,55 @@
+<div class="cards text-uppercase fw-bold">
+  <% @weeks.each_with_index do |weekday, index|%>
+    <% if index== 0 || index== 6 %>
+      <% color = "bg-light" %>
+    <% else  %>
+      <% color = "bg-light" %>
+    <% end %>
+    <div class="card-category <%= color %>" id="small-card-category">
+      <p class="mb-0"><%= weekday %></p>
+    </div>
+  <% end %>
+</div>
+<div class="cards">
+  <% 3.times do %>
+    <div class="card-category placeholder-grey"></div>
+  <% end %>
+  <% days.each do |day| %>
+    <%= link_to new_day_preference_path(day), class: "text-dark text-decoration-none" do %>
+      <div class="card-category">
+        <div class=" mt-2">
+          <div class="d-flex justify-content-start" style="width: 100px">
+            <p class="date-corner px-1"><%= day.date.day %></p>
+            <% Preference.where(day:).each do |preference| %>
+              <% if @current_user.preferences.include?(preference) %>
+                <i class="fa-solid fa-flag status-corner"></i>
+              <% end %>
+            <% end %>
+          </div>
+          <% empty_count = 0 %>
+          <% shifts.each do |shift| %>
+            <% if shift.day == day %>
+              <% if Assignment.where(shift:, user: @current_user).count > 0 %>
+                <p class="shifts shift-good bg-warning text-nowrap text-white"><%= "#{shift.start_time.hour}:00 - #{shift.end_time.hour}:00" %></p>
+                <div style="height: 1em"></div>
+                <div style="height: 1em"></div>
+                <div style="height: 1em"></div>
+              <% elsif shift.assignments.count == 0 %>
+                <% empty_count += 1 %>
+              <% end %>
+            <% end %>
+          <% end %>
+          <% if empty_count == 3%>
+            <p class="shifts shift-invisible">no one scheduled</p>
+          <% elsif empty_count < 3 && empty_count > 0 %>
+            <p class="empty-shift-warning">empty shift</p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+  <% @days_after.times do %>
+    <div class="card-category placeholder-grey "></div>
+  <% end %>
+</div>
+</div>

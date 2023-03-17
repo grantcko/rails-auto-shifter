@@ -1,0 +1,16 @@
+<div
+  class="bg-image card shadow-1-strong  <%= 'd-none' unless @days.first.assignments.empty?%>"
+  style="background-color: #fbb948;"
+>
+  <div class="card-body text-black" data-controller= "loading-spin" >
+    <h5 class="card-title text-uppercase badge bg-primary text-wrap" style="width: 20rem;"> monthly schedule</h5>
+    <p class="card-text">
+      <li class="text-start h5">Each day, there are three types of shifts.</li>
+      <li class="text-start h5">Each shifts have to have at least three employees.</li>
+      <li class="text-start h5">Employee have to take 9 mandatory days off.</li>
+      <li class="text-start h5">Employee can work up to 6 days max and have to take a day off.</li>
+      <li class="text-start h5">If employee assigned to late shift, the employee is not able to assigned to early shift next day.</li>
+    </p>
+    <form action="/days?month=<%= params[:month] %>" method="post"><i class="fa-solid fa-arrow-right mx-2"></i><button class="generate-btn" data-controller="loading-spin" data-action="click->loading-spin#insertspin">Click to Generate Schedule</button></form>
+  </div>
+</div>

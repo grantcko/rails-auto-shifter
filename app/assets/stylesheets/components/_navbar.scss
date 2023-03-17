@@ -1,0 +1,34 @@
+
+.bi {
+  width: 2em;
+  height: 2em;
+
+}
+.bi path,
+.bi polygon,
+.bi rect {
+  fill: #0e0e0f;
+}
+
+.bi circle {
+  stroke: #d2d8df;
+  stroke-width: 1;
+}
+
+.nav-link:hover {
+  background-color: $primary;
+}
+
+.nav {
+  margin: 0;
+  padding: 20px 0;
+}
+
+.nav li {
+  display:inline;
+  color: #fff;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform:uppercase;
+}

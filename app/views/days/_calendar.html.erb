@@ -1,0 +1,57 @@
+<div class="cards text-uppercase fw-bold">
+  <% @weeks.each_with_index do |weekday, index|%>
+    <% if index== 0 || index== 6 %>
+      <% color = "bg-light" %>
+    <% else  %>
+      <% color = "bg-light" %>
+    <% end %>
+    <div class="card-category <%= color %>" id="small-card-category">
+      <p class="mb-0"><%= weekday %></p>
+    </div>
+  <% end %>
+</div>
+<div class="cards">
+  <% @days_before.times do %>
+    <div class="card-category placeholder-grey "></div>
+  <% end %>
+  <% days.each do |day| %>
+    <%= link_to day_path(day), class: "text-dark text-decoration-none" do %>
+      <div class="card-category">
+        <div class=" mt-2">
+          <div class="d-flex justify-content-start" style="width: 100px">
+            <p class="date-corner px-1"><%= day.date.day %></p>
+            <% if day.preferences.include?(Preference.find_by(day:)) %>
+              <p class="status-corner-smaller"><i class="fa-solid fa-bookmark"> <%= day.preferences.count %></i></p>
+            <% end %>
+          </div>
+          <% empty_count = 0 %>
+          <% if day.assignments.count == 9 && params[:user_id].blank? %>
+            <i class="fa-solid fa-check"></i> Assigned
+          <% else %>
+            <% shifts.each do |shift| %>
+              <% if shift.day == day %>
+                <% if shift.assignments.count == 3 %>
+                  <p class="shifts shift-good bg-warning text-nowrap text-white"><%= "#{shift.start_time.hour}:00 - #{shift.end_time.hour}:00" %></p>
+                <% elsif shift.assignments.count < 3 && shift.assignments.count > 0 %>
+                  <p class="shifts shift-warning text-white"><%= "#{shift.start_time.hour}:00 - #{shift.end_time.hour}:00" %><i class="fa-solid fa-triangle-exclamation mx-1"></i></p>
+                <% elsif shift.assignments.count == 0 %>
+                  <% empty_count += 1 %>
+                <% else %>
+                  <p class="shifts shift-warning text-white"><%= "#{shift.start_time.hour}:00 - #{shift.end_time.hour}:00" %><i class="fa-solid fa-triangle-exclamation mx-1"></i></p>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+          <% if empty_count == 3%>
+            <p class="shifts shift-invisible">no one scheduled</p>
+          <% elsif empty_count < 3 && empty_count > 0 %>
+            <p class="empty-shift-warning">empty shift</p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+  <% @days_after.times do %>
+    <div class="card-category placeholder-grey "></div>
+  <% end %>
+</div>

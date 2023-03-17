@@ -1,0 +1,68 @@
+#sidebar {
+  position: absolute;
+  width: 300px;
+  height: 100%;
+  left: -385px;
+  transition: .4s;
+}
+
+#sidebar .toggle-btn {
+  position: absolute;
+  top: 24px;
+  left: 400px;
+}
+
+.toggle-btn i {
+  font-size: 16px;
+  color: #787676;
+  display: block;
+  margin-top: 4px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+#sidebar.active {
+  left: 0;
+}
+
+#manager-calendar.active {
+  left: 385px;
+}
+
+.generate-top {
+  display: flex;
+    justify-content: space-between;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    background-color: $warning;
+    text-align: center;
+    border-style: solid;
+    border-color: grey;
+    border-width: 1px;
+    color: rgb(250, 249, 249);
+    align-items: center;
+
+}
+
+.calendar-month {
+  top: 50%;
+  vertical-align: middle;
+  margin-left: 24px;
+  margin-right: 24px;
+}
+
+.generate-btn {
+  background-color: #90c2ff;
+  color: rgb(18, 8, 8);
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: fit-content;
+  height: 50px;
+  border: none;
+  // border-radius: 0px 5px 0px 0px;
+}

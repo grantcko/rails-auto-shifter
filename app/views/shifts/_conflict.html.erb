@@ -1,0 +1,26 @@
+<div class="card-conflict text-center mt-3">
+  <div class="card-header">
+    <i class="fa-sharp fa-solid fa-calendar-check"></i>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">No Conflict</h5>
+    <div class="card-shift m-3">From: <%= @shift.start_time.hour %>:00 - To: <%= @shift.end_time.hour %>:00</div>
+    <p>Employee Assigned to this Shift</p>
+    <div data-controller="sortable" data-method="destroy" data-shift-id="<%= @shift.id %>">
+      <% @shift.assignments.each do |assignment| %>
+        <div class="notification draggable-item" data-id="<%= assignment.id %>">
+          <%= cl_image_tag assignment.user.photo.key, class: "avatar-large" %>
+          <div class="notification-content text-center">
+            <p><%= assignment.user.name %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="card-footer text-muted">
+    Drag & Drop to Reassign
+  </div>
+</div>
+<div class="mt-3">
+  <%= link_to 'Back to Month View', days_path, class: 'text-primary text-decoration-none'  %>
+</div>

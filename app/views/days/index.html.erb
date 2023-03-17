@@ -1,0 +1,66 @@
+<div style="margin-left:4.0rem;">
+  <% if @current_user.manager == true %>
+    <%# MANAGER CALENDAR %>
+    <div class="position relative">
+      <div class="d-flex justify-content-start" id="manager-calendar">
+        <%= render "days/searchbar", users: @users %>
+        <div class="text-center calendar p-3  w-100">
+          <div class="calendar p-3 position-relative">
+            <%= render 'days/mgr_generating_schedule_rules' %>
+            <div class="calendar-content <%= 'hidden' if @days.first.assignments.empty?%>">
+              <div class="generate-top my-3">
+                <%= form_with url: days_path, method: :get, class: "d-flex" do %>
+                  <%= button_tag  name: "month", value: params[:month] ? params[:month].to_i - 1 : (Date.today.month - 1).to_s  do %>
+                    prev
+                  <% end %>
+                  <h2 class="calendar-month"><%= link_to @this_month, days_path, class:"text-decoration-none text-dark"  %></h2>
+                  <% if params[:month].to_i > 11 %>
+                    <%= button_tag  name: "month", value: params[:month] ? params[:month].to_i + 1 : Date.today.month + 1  do %>
+                      next
+                    <% end %>
+                  <% else %>
+                    <%= button_tag  name: "month", value: params[:month] ? params[:month].to_i + 1 : Date.today.month + 1  do %>
+                      next
+                    <% end %>
+                  <% end %>
+                <% end %>
+                <%= render 'days/shift_errors', days: @days %>
+                <form action="/days?month=<%= params[:month] %>" method="post"><i class="fa-solid fa-arrow-right mx-2"></i><button class="generate-btn" data-controller="loading-spin" data-action="click->loading-spin#insertspin">Click to Generate Schedule</button></form>
+              </div>
+              <%= render 'days/calendar', shifts: @shifts, days: @days %>
+              <%= render "days/loading_bar", users: @users %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <%# EMPLOYEE CALENDAR %>
+    <div class="employee-calendar-layout">
+      <div class="m-2" id="manager-calendar">
+        <%#= render 'days/greeting' %>
+        <div class="calendar">
+          <div class="generate-top my-3 mx-4 d-flex justify-content-center">
+            <%= form_with url: days_path, method: :get, class: "d-flex justify-content-center" do %>
+              <%= button_tag  name: "month", value: params[:month] ? params[:month].to_i - 1 : (Date.today.month - 1).to_s  do %>
+                prev
+              <% end %>
+              <h2 class="calendar-month"><%= link_to @this_month, days_path, class:"text-decoration-none text-dark"  %></h2>
+              <% if params[:month].to_i > 11 %>
+                <%= button_tag  name: "month", value: params[:month] ? params[:month].to_i + 1 : Date.today.month + 1  do %>
+                  next
+                <% end %>
+              <% else %>
+                <%= button_tag  name: "month", value: params[:month] ? params[:month].to_i + 1 : Date.today.month + 1  do %>
+                  next
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+          <%= render 'days/employee_calendar', shifts: @shifts, days: @days %>
+        </div>
+        <%= render 'days/preference_bar' %>
+      </div>
+    </div>
+  <% end %>
+</div>
