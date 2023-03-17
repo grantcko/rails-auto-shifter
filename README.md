@@ -1,1 +1,1 @@
-Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
+This app is made as an internal app for a hotel company. It is made to schedule 24 hour shifts for up to 20 employees.
